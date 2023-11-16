@@ -1,6 +1,7 @@
 package com.example.wecon.entity;
 
 import jakarta.persistence.Column;
+import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToOne;
 import lombok.AllArgsConstructor;
@@ -13,6 +14,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 @AllArgsConstructor
 public class UserStatistics {
 
+    @OneToOne()
+    @Id
     @Column(name = "user_id")
     private User user;
     @Column(name = "step_count")
