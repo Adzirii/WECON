@@ -1,15 +1,23 @@
 package com.example.wecon.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
-@Data
+@Entity
+@Getter
+@Setter
+
 @Table(name = "user_promotions")
 public class UserPromotions {
-    @Column(name = "promotion_id")
-    private Promotion promotion;
-    @Column(name = "user_id")
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long promId;
+
+    @OneToOne
+    @JoinColumn(name = "user_id", nullable = false, unique = true)
     private User user;
-    private boolean status;
+
+    private boolean isActive;
 }

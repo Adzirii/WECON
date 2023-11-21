@@ -6,12 +6,17 @@ import com.example.wecon.repository.UserStatisticsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class UserStatisticsService {
     @Autowired
     private UserStatisticsRepository userStatisticsRepository;
-
-    public UserStatistics getStat(User user){
+    public Optional<UserStatistics> getUserStatistics(Optional<User> user) {
         return userStatisticsRepository.findUserStatisticsByUser(user);
+    }
+
+    public void saveUserStatistics(UserStatistics userStatistics) {
+        userStatisticsRepository.save(userStatistics);
     }
 }

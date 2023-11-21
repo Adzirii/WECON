@@ -1,32 +1,35 @@
 package com.example.wecon.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToOne;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import jakarta.persistence.*;
+import lombok.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 
-@Data
+import java.time.LocalDateTime;
+
+@Entity
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 public class UserStatistics {
 
-    @OneToOne()
     @Id
-    @Column(name = "user_id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long statId;
+
+    @OneToOne
+    @JoinColumn(name = "user_id", nullable = false, unique = true)
     private User user;
-    @Column(name = "step_count")
+
+
+
+    @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
+    private LocalDateTime lastLogin;
+
+
+    private int totalLogins;
     private int stepCount;
-    @Column(name = "promotions_count")
     private int promotionsCount;
-    @Column(name = "completed_promotions_count")
     private int completedPromCount;
-
-
-
-
-
 }

@@ -1,16 +1,24 @@
 package com.example.wecon.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.OneToOne;
-import jakarta.persistence.Table;
-import lombok.Data;
+import jakarta.persistence.*;
+import lombok.*;
 
-@Data
+@Entity
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "user_authorization")
 public class UserAuthorization {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long authId;
+
     @OneToOne
-    @Column(name = "user_id")
+    @JoinColumn(name = "user_id", nullable = false, unique = true)
     private User user;
-    private String login;
-    private String password;
+
+    @Column(nullable = false)
+    private String passwordHash;
+
 }
